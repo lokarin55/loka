@@ -69,4 +69,4 @@ start = int(input("Enter the start number: "))
 end = int(input("Enter the end number: "))
 
 # Call the function with the user input
-bruteforce_requests(start, end)s
+bruteforce_requests(start, end)
